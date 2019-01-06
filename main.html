@@ -1,21 +1,126 @@
 <html>
 <body onload="generateYears();">
-View Statement of Account for Year <select id="year"></select>
+View Statement of Account for Year <select id="year"></select> <input type="button" value="Go" onclick="fillMonthTable();"><br>
+<br>
+<table>
+<tr>
+<th>
+January
+</th>
+<td id=1>
+---
+</td>
+</tr>
 
-<textarea id="a"></textarea>
+<tr>
+<th>
+February
+</th>
+<td id=2>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+March
+</th>
+<td id=3>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+April
+</th>
+<td id=4>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+May
+</th>
+<td id=5>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+June
+</th>
+<td id=6>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+July
+</th>
+<td id=7>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+August
+</th>
+<td id=8>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+September
+</th>
+<td id=9>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+October
+</th>
+<td id=10>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+November
+</th>
+<td id=11>
+---
+</td>
+</tr>
+
+<tr>
+<th>
+December
+</th>
+<td id=12>
+---
+</td>
+</tr>
+</table>
 </body>
 </html>
 
 <script>
 var year = document.getElementById("year");
 
-var a = document.getElementById("a");
-
 function generateYears() {
     // UUUU/MM/YYYY
     var currentYear = new Date().getFullYear();
-    for (var i = 2018; i < currentYear; ++i) {
-        a.value += currentYear;
+    for (var i = 2018; i <= currentYear; ++i) {
         if (yearExists(i))
             year.innerHTML += "<option value='" + i + "'>" + i + "</option>";
     }
@@ -23,14 +128,27 @@ function generateYears() {
 }
 
 function yearExists(y) {
-    for (var i = 0; i < 12; ++i) {
+    for (var i = 1; i < 13; ++i) {
         var filename = "1702_" + (i < 10 ? "0" + i : i) + y;
-        var http = new XMLHTTPRequest();
-        http.open('HEAD', "/" + , false);
+        var http = new XMLHttpRequest();
+        http.open('HEAD', filename, false);
         http.send();
         if (http.status != 404)
             return True;
     }
     return False;
+}
+
+function fillMonthTable() {
+    for (var i = 1; i < 13; ++i) {
+        var filename = "/1702_" + (i < 10 ? "0" + i : i) + y + ".pdf";
+        var http = new XMLHttpRequest();
+        http.open('HEAD', filename, false);
+        http.send();
+        if (http.status != 404)
+            document.getElementById(i).innerHTML = "<a href='" + filename + "'>View</a>";
+        else
+            document.getElementById(i).innerHTML = "---";
+    }
 }
 </script>
