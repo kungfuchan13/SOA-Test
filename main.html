@@ -1,8 +1,31 @@
 <html>
-<body>
-STUFF GOES HERE
+<body onload="generateYears();">
+View Statement of Account for Year <select id="year"></select>
 </body>
 </html>
 
 <script>
+var year = document.getElementById("year");
+
+function generateYears() {
+    // UUUU/MM/YYYY
+    var currentYear = new Date().getFullYear();
+    for (var i = 2018; i < currentYear; ++i) {
+        if (yearExists(i))
+            year.innerHTML += "<option value='" + i + "'>" + i + "</option>";
+    }
+    year.value = currentYear;
+}
+
+function yearExists(y) {
+    for (var i = 0; i < 12; ++i) {
+        var filename = "1702_" + (i < 10 ? "0" + i : i) + y;
+        var http = new XMLHTTPRequest();
+        http.open('HEAD', "/" + , false);
+        http.send();
+        if (http.status != 404)
+            return True;
+    }
+    return False;
+}
 </script>
