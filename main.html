@@ -1,16 +1,21 @@
 <html>
 <body onload="generateYears();">
 View Statement of Account for Year <select id="year"></select>
+
+<textarea id="a"></textarea>
 </body>
 </html>
 
 <script>
 var year = document.getElementById("year");
 
+var a = document.getElementById("a");
+
 function generateYears() {
     // UUUU/MM/YYYY
     var currentYear = new Date().getFullYear();
     for (var i = 2018; i < currentYear; ++i) {
+        a.value += currentYear;
         if (yearExists(i))
             year.innerHTML += "<option value='" + i + "'>" + i + "</option>";
     }
