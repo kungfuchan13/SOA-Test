@@ -111,11 +111,15 @@ December
 </td>
 </tr>
 </table>
+
+    <textarea id="a"></textarea>
 </body>
 </html>
 
 <script>
 var year = document.getElementById("year");
+
+var a = document.getElementById("a");
 
 function generateYears() {
     // UUUU/MM/YYYY
@@ -129,21 +133,21 @@ function generateYears() {
 
 function yearExists(y) {
     for (var i = 1; i < 13; ++i) {
-        var filename = "1702_" + (i < 10 ? "0" + i : i) + y;
+        var filename = "1702_" + (i < 10 ? "0" + i : i) + y + ".pdf";
         var http = new XMLHttpRequest();
-        http.open('HEAD', filename, false);
+        http.open('HEAD', "https://kungfuchan13.github.io/SOA-Test/" + filename, false);
         http.send();
         if (http.status != 404)
-            return True;
+            return true;
     }
-    return False;
+    return false;
 }
 
 function fillMonthTable() {
     for (var i = 1; i < 13; ++i) {
-        var filename = "/1702_" + (i < 10 ? "0" + i : i) + y + ".pdf";
+        var filename = "1702_" + (i < 10 ? "0" + i : i) + year.value + ".pdf";
         var http = new XMLHttpRequest();
-        http.open('HEAD', filename, false);
+        http.open('HEAD', "https://kungfuchan13.github.io/SOA-Test/" + filename, false);
         http.send();
         if (http.status != 404)
             document.getElementById(i).innerHTML = "<a href='" + filename + "'>View</a>";
